@@ -1,0 +1,32 @@
+[
+    {
+        "Name": "GreenTea",
+        "Type": "Tea",
+        "Water": 100,
+        "Ice": 20,
+        "Milk": 30,
+        "Milk_Foam": 10,
+        "Price": 30,
+        "ID": 1
+    },
+    {
+        "Name": "Person_2",
+        "Age": 22,
+        "Email": "22@gmail.com"
+    },
+    {
+        "Name": "Person_3",
+        "Age": 33,
+        "Email": "33@gmail.com"
+    },
+    {
+        "Name": "Person_5",
+        "Age": 44,
+        "Email": "55@gmail.com"
+    },
+    {
+        "Name": "Person_333",
+        "Age": 444444,
+        "Email": "55@gmail.com"
+    }
+]

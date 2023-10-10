@@ -1,0 +1,123 @@
+import random
+
+cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+user_cards = []
+com_cards = []
+
+def deal_cards():
+  global cards
+  deal = random.choice(cards)
+  return deal
+
+def calculate_score(cards):
+  score = 0
+  for number in cards :
+    score += number
+  return score
+
+def check_ace(cards):
+  if cards[0] == 1 and cards[1] == 10 or cards[0] == 10 and cards[1] == 1 :
+    return True
+  else :
+    return False
+
+def check_score(score):
+  if score > 21 :
+    return True
+
+def compare(user_score, computer_score):
+  result = 0
+  if user_score > computer_score :
+    result = 1
+  elif computer_score > user_score :
+    result = 2
+  elif computer_score == user_score :
+    result = 3
+  return result
+
+def com_win():
+  print(f"Computer cards : {com_cards} current score : {calculate_score(com_cards)}")
+  print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+  print("Computer Win")
+
+def user_win():
+  print(f"Computer cards : {com_cards} current score : {calculate_score(com_cards)}")
+  print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+  print("You Win")
+
+while True :
+  while True :
+    play_game = input("Do you want to play a game of Blackjack? [Y/N] :")
+    user_cards.clear()
+    com_cards.clear()
+    if play_game in "Nn" :
+      break
+    elif play_game in "Yy" :
+      com_cards.append(deal_cards())
+      com_cards.append(deal_cards())
+      check_ace_com = check_ace(com_cards)
+      user_cards.append(deal_cards())
+      user_cards.append(deal_cards())
+      check_ace_user = check_ace(user_cards)
+
+      if check_ace_com == True :
+        print(f"Computer cards : {com_cards} current score : {calculate_score(com_cards)+10}")
+        print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+        print("Computer Win")
+        break
+      else :
+        if check_ace_user == True :
+          print(f"You cards : {user_cards} current score : {calculate_score(user_cards)+10}")
+          print(f"Computer cards : {com_cards} current score : {calculate_score(com_cards)}")
+          print("You Win")
+          break
+        else :
+          print(f"Computer's first cards : {com_cards[0]}")
+          print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+          
+
+    
+        
+      check = True
+      while True :
+        if (check) :
+          draw_cards = input("Type 'y' to get another card, type 'n' to pass:")
+        if draw_cards in "Yy":
+          user_cards.append(deal_cards())
+          if check_score(calculate_score(user_cards)) == True:
+            com_win()
+            break
+          elif calculate_score(user_cards) == 21 :
+            user_win()
+            break
+          else:
+            print(f"Computer's first cards : {com_cards[0]}")
+            print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+        elif draw_cards in "Nn":
+          check = False
+          if calculate_score(com_cards) < 16 :
+            com_cards.append(deal_cards())
+            if check_score(calculate_score(com_cards)) == True:
+              user_win()
+              break
+          else :
+            if compare(calculate_score(user_cards), calculate_score(com_cards)) == 1:
+              user_win()
+              break
+            elif compare(calculate_score(user_cards), calculate_score(com_cards)) == 2:
+              com_win()
+              break
+            elif compare(calculate_score(user_cards), calculate_score(com_cards)) == 3:
+              print(f"Computer cards : {com_cards} current score : {calculate_score(com_cards)}")
+              print(f"You cards : {user_cards} current score : {calculate_score(user_cards)}")
+              print("Draw")
+              break
+            break
+        else:
+          print("Error")
+          break  
+    else:
+      print("Error")
+      break
+  if play_game in "Nn" :
+    break        
